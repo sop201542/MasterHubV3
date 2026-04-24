@@ -1,33 +1,32 @@
--- [[ MasterHub V3 - Ultimate Fix ]]
-print("核心啟動中...")
+-- [[ MasterHub V3 - Zero-404 Edition ]]
+print("嘗試加載 UI 引擎...")
 
--- 換一個更穩定的 UI 來源 (手機專用)
-local success, OrionLib = pcall(function()
-    return loadstring(game:HttpGet('https://raw.githubusercontent.com/jensonh02/Orion/main/source'))()
+-- 使用 Rayfield 庫，這個網址在手機上比 Orion 穩很多
+local success, Rayfield = pcall(function()
+    return loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 end)
 
 if not success then
-    warn("UI 庫載入失敗，嘗試備用來源...")
-    OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
+    warn("UI 引擎加載失敗，可能是你的執行器不支持 game:HttpGet")
+    return
 end
 
-local Window = OrionLib:MakeWindow({
-    Name = "MasterHub V3", 
-    HidePremium = true, 
-    SaveConfig = false
+local Window = Rayfield:CreateWindow({
+   Name = "MasterHub V3",
+   LoadingTitle = "正在啟動雲端核心...",
+   LoadingSubtitle = "by sop201542",
+   ConfigurationSaving = {
+      Enabled = false
+   }
 })
 
-local Tab = Window:MakeTab({
-    Name = "主要功能",
-    Icon = "rbxassetid://4483345998"
+local Tab = Window:CreateTab("主要功能", 4483345998)
+
+Tab:CreateButton({
+   Name = "點擊測試",
+   Callback = function()
+       print("腳本運作完美！")
+   end,
 })
 
-Tab:AddButton({
-    Name = "測試按鈕",
-    Callback = function()
-        print("按鈕運作正常！")
-    end
-})
-
-OrionLib:Init()
-print("✅ MasterHub 已完全加載！")
+print("✅ MasterHub 啟動成功！")
