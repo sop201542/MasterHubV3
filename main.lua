@@ -1,14 +1,36 @@
--- MasterHub V3 極簡載入器 (排除緩存版)
-local target_url = "https://raw.githubusercontent.com/sop201542/MasterHubV3/main/main.lua"
+-- [[ MasterHub V3 - Stable Mobile ]]
+local S = {
+    p = game:GetService("Players"),
+    t = game:GetService("TeleportService"),
+    g = game:GetService("GuiService")
+}
+local LP = S.p.LocalPlayer
 
--- 使用 tick() 產生的隨機數強制刷新，跳過 404 快取
-local s, r = pcall(game:HttpGet(target_url .. "?nocache=" .. tick()))
+-- 加載 Orion UI (直接調用網址)
+local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
 
-if s and #r > 100 then
-    print("✅ 雲端代碼抓取成功！正在執行...")
-    loadstring(r)()
-else
-    -- 如果還是 404，印出執行器抓到的原始訊息以便偵錯
-    warn("❌ 執行器回報錯誤：")
-    print(tostring(r)) 
-end
+local Window = OrionLib:MakeWindow({
+    Name = "MasterHub V3", 
+    HidePremium = true, 
+    SaveConfig = true, 
+    ConfigFolder = "MHV3"
+})
+
+local Tab = Window:MakeTab({
+    Name = "主要功能",
+    Icon = "rbxassetid://4483345998"
+})
+
+Tab:AddButton({
+    Name = "腳本測試",
+    Callback = function()
+        OrionLib:MakeNotification({
+            Name = "系統",
+            Content = "腳本運行成功！",
+            Time = 5
+        })
+    end
+})
+
+OrionLib:Init()
+
