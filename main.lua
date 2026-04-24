@@ -1,3 +1,14 @@
--- [[ MasterHub V3 - HIGH-SECURITY OBFUSCATED ]]
-local _0x5F=game;local _0x2E=_0x5F.GetService;local _0x82={p=_0x2E(_0x5F,"\80\108\97\121\101\114\115"),t=_0x2E(_0x5F,"\84\101\108\101\112\111\114\116\83\101\114\118\105\99\101"),h=_0x2E(_0x5F,"\72\116\116\112\83\101\114\118\105\99\101"),g=_0x2E(_0x5F,"\71\117\105\83\101\114\118\105\99\101"),r=_0x2E(_0x5F,"\82\117\110\83\101\114\118\105\99\101")};local _0x1C=_0x82.p.LocalPlayer;local _0x99="\95\86\51\95\73\78\84\69\82\78\65\76";if not getgenv()[_0x99]then getgenv()[_0x99]={}end;local _0xUI=loadstring(_0x5F:HttpGet('\104\116\116\112\115\058\047\047\114\97\119\046\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\046\99\111\109\047\115\104\108\101\120\119\97\114\101\047\79\114\105\111\110\047\109\97\105\110\047\115\111\117\114\99\101'))();local _0xW=_0xUI:MakeWindow({Name="\77\97\115\116\101\114\72\117\98\32\86\51",HidePremium=true,SaveConfig=true,ConfigFolder="\77\72\86\51"});local _0xT=_0xW:MakeTab({Name="\228\184\187\232\166\129\229\138\159\232\131\189",Icon="rbxassetid://4483345998"});_0xT:AddButton({Name="\233\129\139\231\171\175\230\184\172\232\169\166",Callback=function()_0xUI:MakeNotification({Name="\231\179\187\231\171\177",Content="\233\155\178\231\171\175\232\189\134\229\133\165\230\136\144\229\138\159",Time=5})end});_0x82.g.ErrorMessageChanged:Connect(function()task.wait(1);_0x82.t:Teleport(_0x5F.PlaceId,_0x1C)end);_0xUI:Init();
+-- MasterHub V3 極簡載入器 (排除緩存版)
+local target_url = "https://raw.githubusercontent.com/sop201542/MasterHubV3/main/main.lua"
 
+-- 使用 tick() 產生的隨機數強制刷新，跳過 404 快取
+local s, r = pcall(game:HttpGet(target_url .. "?nocache=" .. tick()))
+
+if s and #r > 100 then
+    print("✅ 雲端代碼抓取成功！正在執行...")
+    loadstring(r)()
+else
+    -- 如果還是 404，印出執行器抓到的原始訊息以便偵錯
+    warn("❌ 執行器回報錯誤：")
+    print(tostring(r)) 
+end
